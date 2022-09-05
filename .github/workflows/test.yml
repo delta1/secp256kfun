@@ -7,7 +7,7 @@ jobs:
 
   fmt:
     name: Rustfmt
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -51,14 +51,16 @@ jobs:
           override: true
       - uses: Swatinem/rust-cache@v1.2.0
 
-      - uses: actions-rs/cargo@v1
+      - name: cross test (armv7)
+        uses: actions-rs/cargo@v1
         if: matrix.target == 'armv7-unknown-linux-gnueabihf'
         with:
           use-cross: true
           command: test
           args:  ${{ matrix.args }} --release --verbose --target ${{ matrix.target }}
 
-      - uses: actions-rs/cargo@v1
+      - name: cargo test
+        uses: actions-rs/cargo@v1
         if: matrix.target != 'armv7-unknown-linux-gnueabihf'
         with:
           command: test
