@@ -7,7 +7,7 @@ use crate::{
     },
     Sigma, Writable,
 };
-use crypto_common::BlockSizeUser;
+use digest::crypto_common::BlockSizeUser;
 use digest::{FixedOutput, Update};
 use generic_array::GenericArray;
 

@@ -43,7 +43,7 @@ let message = Message::<Public>::plain("the-times-of-london", b"Chancellor on br
 // Sign the message with our keypair
 let signature = schnorr.sign(&keypair, message);
 // Get the verifier's key
-let verification_key = keypair.verification_key();
+let verification_key = keypair.public_key().to_point();
 // Check it's valid 🍿
 assert!(schnorr.verify(&verification_key, message, &signature));
 ```
@@ -53,7 +53,8 @@ assert!(schnorr.verify(&verification_key, message, &signature));
 - BIP-340 compliant signing and verification
 - Adaptor signatures
 - compatibility with `rust-secp256k1`'s `schnorrsig` module with `libsecp_compat` feature.
-- [MuSig2] implementation compatible with [secp256k1-zkp]
+- [MuSig2] implementation compatible with [this PR](https://github.com/jonasnick/bips/pull/37) of the spec.
+- [FROST] implementation
 - Feature flags
   - `serde`: for serde implementations for signatures
   - `libsecp_compat`: for `From` implementations between `rust-secp256k1`'s Schnorr signatures.
@@ -64,3 +65,4 @@ assert!(schnorr.verify(&verification_key, message, &signature));
 [secp256kfun]: https://docs.rs/secp256kfun
 [secp256k1-zkp]: https://github.com/ElementsProject/secp256k1-zkp/pull/131
 [MuSig2]: https://eprint.iacr.org/2020/1261.pdf
+[FROST]: https://eprint.iacr.org/2020/852.pdf
