@@ -7,8 +7,7 @@ use crate::{
     },
     Sigma, Writable,
 };
-use digest::crypto_common::BlockSizeUser;
-use digest::{FixedOutput, Update};
+use digest::{crypto_common::BlockSizeUser, FixedOutput, Update};
 use generic_array::GenericArray;
 
 /// A trait for a Fiat-Shamir proof transcript.
